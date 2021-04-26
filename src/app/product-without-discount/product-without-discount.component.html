@@ -1,0 +1,14 @@
+<p>product-without-discount works!</p>
+<div class="row">
+    <div *ngFor="let product of ProductList">
+        <div class="card" style="width: 14rem;">
+            <img class="card-img-top" [src]="'../../assets/'+product.Img" alt="Card image cap" height="200px">
+            <div class="card-body">
+              <h5 class="card-title">{{product.Name}}</h5>
+              <p>Price : {{product.Price}} EGY</p>
+              <!-- <p>Disccount : {{product.discont | percent}}</p> -->
+              <a href="#" class="btn btn-primary">Add To Card</a>
+            </div>
+          </div>
+        </div>
+</div>

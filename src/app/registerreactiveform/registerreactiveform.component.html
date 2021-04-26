@@ -1,0 +1,58 @@
+<div class="col-5 m-5">
+
+<h2>Register with reactive form</h2>
+
+<form [formGroup]="RegisterForm">
+    <div class="form-group">
+        <label>User Name</label>
+        <input class="form-control" type="text" formControlName="username" [class.is-invalid]="userName?.invalid && userName?.touched">
+    
+        <div *ngIf=" userName?.errors && (userName?.invalid && userName?.touched)">
+            <small class="text-danger" *ngIf="userName?.errors?.required">
+                User name is required
+            </small>
+            <small class="text-danger" *ngIf="userName?.errors?.minlength">
+                Min length is 5
+            </small>
+           
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input [class.is-invalid]="email?.invalid && email?.touched" class="form-control" type="email" formControlName="email">
+   
+        <div *ngIf=" email?.errors && (email?.invalid && email?.touched)">
+            <small class="text-danger" *ngIf="email?.errors?.required">
+                email is required
+            </small>
+            <small class="text-danger" *ngIf="email?.errors?.pattern">
+                pattern didnt match
+            </small>
+           
+        </div>
+    </div>
+    <div class="form-group">
+        <label>password</label>
+        <input [class.is-invalid]="password?.invalid && password?.touched" class="form-control" type="password" formControlName="password">
+      
+        <div *ngIf=" password?.errors && (password?.invalid && password?.touched)">
+            <small class="text-danger" *ngIf="password?.errors?.required">
+               password is required
+            </small>
+            <!-- <small class="text-danger" *ngIf="password?.errors?.minlength">
+                Min length is 5
+            </small> -->
+           
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm password</label>
+        <input class="form-control" type="password" formControlName="confirmpassword" [class.is-invalid]="RegisterForm.errors?.misMatch">
+        <small *ngIf="RegisterForm.errors?.misMatch" class="text-danger">
+            Passwords does not match
+        </small>
+    </div>
+    <button type="button" class="btn btn-primary">Submit</button>
+
+</form>
+</div>

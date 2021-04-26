@@ -1,0 +1,52 @@
+<p>notes works!</p>
+
+<div class="container col-5">
+    
+    <form [formGroup]=notes (ngSubmit)="onSubmit(notes.value)">
+    
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name" >
+            <div *ngIf="user?.errors && (user?.invalid && user?.touched)">
+                <small class="text-danger" *ngIf="user?.errors?.required">
+                    UserName Is Required
+                </small>
+                <small class="text-danger" *ngIf="user?.errors?.regularName">
+                    Not allow to use {{user?.errors?.regularName.value}} in username 
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label>Product</label>
+                <select class="form-control" formControlName="product" [class.is-invalid]="notes.get('product')?.errors?.required">
+                    <option value="" disabled></option>
+                    <option *ngFor="let product of allProduct" >
+                        {{product.Name}}
+                    </option>
+                </select>
+                
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" (click)="enterDiscount()" type="checkbox">
+                <label class="form-check-label">
+                    Enter Discount
+                </label>
+                <div *ngIf="haveDiscount">
+                    <label for="">Enter Discount Percent</label>
+                    <input type="text" class="form-control" formControlName="discount">
+                    <small class="text-danger" *ngIf="this.notes.get('discount')?.invalid && this.notes.get('discount')?.touched">Is Reguired</small>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" (click)="addNewComment()">Add Comment</button>
+            <div formArrayName="comment" *ngFor="let coment of comments.controls;let i=index">
+                <label>Comment # {{i+1}}</label>
+                <input type="text" class="form-control" [formControlName]="i">
+                <button class="btn btn-warning" (click)="removeComment(i)">X</button>
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Submit Form" >
+
+    </form>
+</div>
